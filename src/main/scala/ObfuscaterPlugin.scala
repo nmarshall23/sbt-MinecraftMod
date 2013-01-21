@@ -41,7 +41,7 @@ val results = (Process( deobf :: "--config" :: config :: "--inheritance" :: inhe
 results._2
 },
 
-reobfuscate <<= (packageBin in Compile, recalcInheritance,  mcpDeobfuscatePath, retroGuardConfig, deobfMinecraftJar , target) map { (bin:File, inh, deobf, config, mcjar,t) =>
+reobfuscate <<= (packageBin in Compile, recalcInheritance,  mcpDeobfuscatePath, retroGuardConfig, target) map { (bin:File, inh, deobf, config, t) =>
 	val obfzip = t + "/obfuscated.zip"
 	val inheritanceFile = t + "/my.inh"
 val results = (Process( deobf :: "--config" :: config :: "--stored_inheritance" :: inh :: "--invert" :: "--infiles" :: bin.toString :: "--outfiles" :: obfzip :: Nil, file("/") ) !
