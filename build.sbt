@@ -6,9 +6,8 @@ organization := "com.gmail.nmarshall23"
 
 version := "0.3"
 
+scalaVersion := "2.10.0"
+
 EclipseKeys.withSource := true
 
-resolvers += Resolver.url("artifactory", url("http://scalasbt.artifactoryonline.com/scalasbt/sbt-plugin-releases"))(Resolver.ivyStylePatterns)
-
-addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.8.5")
 
