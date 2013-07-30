@@ -17,10 +17,7 @@ import org.apache.ivy.core.resolve.ResolveOptions
 object ObfuscaterPlugin extends Plugin
 {
 
-  object AssemblyKeys {
-    lazy val outputPath        = TaskKey[File]("assembly-output-path")
-    
-  }
+  
 
 object MinecraftReobfuscater {
 
