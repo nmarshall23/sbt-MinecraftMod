@@ -1,7 +1,9 @@
-sbt-minecraft-plugin
-====================
+sbt-MinecraftMod
+================
 
-A plugin for SBT, to assist with writing Minecraft mods, with Scala.
+A SBT plugin to assist with reobfuscating minecraft mods.
+
+You can write mods using this with scala or java. 
 
 I will assume that you have some knowledge of java, scala, sbt, and are using Linux. 
 You must have Java, sbt, and Ivy installed.

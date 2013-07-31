@@ -3,8 +3,8 @@
   <classpathentry output="target/scala-2.9.2/sbt-0.12/classes" path="src/main/java" kind="src"></classpathentry>
   <classpathentry output="target/scala-2.9.2/sbt-0.12/test-classes" path="src/test/scala" kind="src"></classpathentry>
   <classpathentry output="target/scala-2.9.2/sbt-0.12/test-classes" path="src/test/java" kind="src"></classpathentry>
+  <classpathentry path="./lib/asm-all-3.3.1.jar" kind="lib"></classpathentry>
   <classpathentry path="./lib/mcp_deobfuscate-1.0.jar" kind="lib"></classpathentry>
-  <classpathentry kind="lib" path="/home/nick/.ivy2/cache/org.ow2.asm/asm-all/jars/asm-all-4.0.jar" sourcepath="/home/nick/.ivy2/cache/org.ow2.asm/asm-all/srcs/asm-all-4.0-sources.jar"></classpathentry>
   <classpathentry kind="lib" path="/home/nick/.ivy2/cache/com.beust/jcommander/jars/jcommander-1.29.jar" sourcepath="/home/nick/.ivy2/cache/com.beust/jcommander/srcs/jcommander-1.29-sources.jar"></classpathentry>
   <classpathentry path="/home/nick/.ivy2/cache/org.scala-sbt/sbt/jars/sbt-0.12.4.jar" kind="lib"></classpathentry>
   <classpathentry path="/home/nick/.ivy2/cache/org.scala-sbt/main/jars/main-0.12.4.jar" kind="lib"></classpathentry>
