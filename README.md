@@ -1,70 +1,35 @@
 sbt-minecraft-plugin
+====================
+
 A plugin for SBT, to assist with writing Minecraft mods, with Scala.
 
-I'm not going to teach you how to write Minecraft mods with Java, and MCP.
+I will assume that you have some knowledge of java, scala, sbt, and are using Linux. 
+You must have Java, sbt, and Ivy installed.
 
-I am assuming that you are using linux. I've not tried this on any other platform.
+To use this first you must setup your environment. 
 
-First, setup MCP, and then check out mcp_debfuscate https://github.com/FunnyMan3595/mcp_deobfuscate
-You will be using mcp_deobfuscate to reobfuscate your mod.
+First, setup MCP. 
+Run decompile.sh, then recompile.sh.
+Next check out my mcmoding-setupscripts. Follow those instructions for publishing the decompiled minecraft.jar to your local Ivy repo.
 
-You will need to use mcp_deobfuscate to build a retroGuard config file, I have no idea why MCP doesn't ship with the full config file.
-Follow the directions for mcp_deobfuscate, then copy the temp/client_deobf.srg that's your retroGuard config file.
+Next git clone this plugin, then run sbt, and publish-local, 
 
-Now that you have a deobfuscated version of minecraft.jar and a RG config file, your ready to use this plugin.
+You are now ready to create a new sbt project and use this plugin. 
 
-Clone the plugin and publish-local, 
-Copy this next part into your build.sbt
+In project/plugins.sbt add:
 
-At the top of your build.sbt add: 
+addSbtPlugin("com.gmail.nmarshall23" % "minecraft-obfuscater-plugin" % "0.3.2" classifier "assembly")
 
-  import ObfuscaterKeys._
+Next in build.sbt add: MinecraftReobfuscaterSettings
 
-Latter in the file to add: 
+You may want to change these two settings. 
 
-AddMinecraftPluginDefaults
+modDirectoryPath  := Path.userHome / ".minecraft" / "plugins"
 
-This adds the default setting to your sbt.
+minecraftLibrary := "de.ocean-labs" % "mcp" % "1.5.2"
 
-You have to define settings for:
+Change the minecraftLibrary version to what ever version you installed to the local Ivy repo.
 
-  mcpDeobfuscatePath
-  deobfMinecraftJar 
-  retroGuardConfig 
+Lastly after you're mod is compiling. Use the Minecraft-InstallMod task to copy your mod to modDirectoryPath
 
-
-I'd like your thoughts on what good defaults would be. 
-
-Here is a snip from one of my projects:
----------------------------- 
-
-MinecraftPluginSettings
-
-mcpDeobfuscatePath := Path.userHome + "/git/mcp_deobfuscate/mcpd.sh"
-
-minecraftVersion := "1.4.5"
-
-baseConfigPath <<= (minecraftVersion) { mcVersion =>
- Path.userHome + "/Projects/mcMods/" + mcVersion + "BTWmix/"
-}
-
-deobfMinecraftJar <<= (baseConfigPath, minecraftVersion) { (path,version) => 
-	path + "minecraft_" + version + "-deobf.jar"
-}
-
-retroGuardConfig <<= (baseConfigPath) { path => path + "decobj_config/full.srg" }
-
-
-
-------------------------------
-
-The task Minecraft-InstallMod will copy your mod to your minecraft mod dir.
-If your using an OS other then linux you will need to refine
-minecraftHome := Path.userHome ...
-It's defined as a File setting.
-
-
-Known BUGs:
-
-When you subclass an obfuscated class, the obfuscator doesn't always pickup all of the inheritated fields and methods.
-A work around is to look up in your rg config, and add the instruction to obfuscate your class. Just find the inheritated class and look for what not being obfuscated. Yes, I am very aware how much of a pain these bugs are. I would suggest using a java decomiler like: http://java.decompiler.free.fr to check if the obfuscator is working on your classes.
+I hope to soon have a example project that you can clone from github. If you get this working I would love to heard about it.
