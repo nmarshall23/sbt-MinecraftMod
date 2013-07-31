@@ -87,18 +87,18 @@ val recalcInheritanceTask = recalcInheritance <<= (packageBin in Compile,  deobf
   infiles.add(bin)
   infiles.add(mcjar)
   
-  val re = CalcInheritance(inheritanceFile,infiles,infiles )
+  val re = CalcInheritance(inheritanceFile,new ArrayList[File](),infiles,infiles )
   inheritanceFile
 }
 
 def CalcInheritance(inhFile:File,
+					stored_inheritance:ArrayList[File],
 				    infiles:ArrayList[File],
 				    outfiles:ArrayList[File]):Option[MCPDInheritanceGraph] = {
   println("Calculating inheritance...")
   try {
-	  val jlibraryFiles = new java.util.ArrayList[File]()
-  
-	  val inheritance = new MCPDInheritanceVisitor(inhFile,jlibraryFiles)
+    
+	  val inheritance = new MCPDInheritanceVisitor(inhFile,stored_inheritance)
       val inheritanceProcessor = new MCPDFileHandler(inheritance)
       val failures = inheritanceProcessor.processFiles(infiles, outfiles)
 	  inheritance.done()
@@ -123,12 +123,13 @@ val reobfuscateTask = reobfuscate <<= (packageBin in Compile, recalcInheritance,
   
   val outfiles = new ArrayList[File]()
   outfiles.add(obfzip)
+  
+  val storedInh = new ArrayList[File]()
+  storedInh.add(inh)
     
-  val graph = CalcInheritance(inh,infiles,outfiles)
-  if(graph.isDefined) {
-    val re = Translating(config,graph.get,true,infiles,outfiles)
-  }
-	
+  val graph = CalcInheritance(null,storedInh,infiles,outfiles)
+  for( gr <- graph ) Translating(config,gr,true,infiles,outfiles)
+    
 obfzip
 }
 
