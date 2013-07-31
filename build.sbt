@@ -21,3 +21,7 @@ artifact in (Compile, assembly) ~= { art =>
 }
 
 addArtifact(artifact in (Compile, assembly), assembly)
+
+libraryDependencies += "org.ow2.asm" % "asm-all" % "4.0"
+
+libraryDependencies += "com.beust" % "jcommander" % "1.29"
