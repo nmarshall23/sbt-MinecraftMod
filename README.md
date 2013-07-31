@@ -34,4 +34,6 @@ Change the minecraftLibrary version to what ever version you installed to the lo
 
 Lastly after you're mod is compiling. Use the Minecraft-InstallMod task to copy your mod to modDirectoryPath
 
+Under the hood, I'm using MCP Deobfuscate, check it out at https://github.com/FunnyMan3595/mcp_deobfuscate
+
 I hope to soon have a example project that you can clone from github. If you get this working I would love to heard about it.
